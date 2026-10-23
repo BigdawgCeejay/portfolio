@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ceejay | Full Stack Engineer</title>
+  <meta name="description" content="Ceejay, full stack engineer. Projects, skills, and background." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1f3f;
+      --navy-2: #13294f;
+      --blue: #2f6fed;
+      --blue-soft: #e9f0fe;
+      --sky: #8db4ff;
+      --ink: #0b1f3f;
+      --text: #3d4a60;
+      --muted: #6d7a90;
+      --line: #e3e9f3;
+      --bg: #ffffff;
+      --max: 1060px;
+      --r: 22px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body { font-family: "DM Sans", system-ui, -apple-system, sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; font-size: 17px; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; }
+    h1, h2, h3, h4 { color: var(--ink); line-height: 1.2; letter-spacing: -0.02em; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .logo { font-weight: 700; font-size: 20px; color: var(--navy); text-decoration: none; }
+    .logo span { color: var(--blue); }
+    .nav ul { list-style: none; display: flex; gap: 6px; }
+    .nav ul a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--muted); padding: 8px 14px; border-radius: 999px; transition: color .2s, background .2s; }
+    .nav ul a:hover, .nav ul a.active { color: var(--navy); background: var(--blue-soft); }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; background: var(--navy); color: #c9d6ee; padding: 130px 0 140px; border-radius: 0 0 48px 48px; }
+    .hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; filter: blur(10px); }
+    .hero::before { width: 520px; height: 520px; right: -140px; top: -160px; background: radial-gradient(circle, rgba(47,111,237,.55), transparent 70%); }
+    .hero::after { width: 380px; height: 380px; left: -120px; bottom: -180px; background: radial-gradient(circle, rgba(141,180,255,.25), transparent 70%); }
+    .hero .wrap { position: relative; z-index: 1; }
+    .eyebrow { display: inline-block; font-size: 14px; font-weight: 600; color: #fff; background: rgba(255,255,255,.1); padding: 6px 14px; border-radius: 999px; margin-bottom: 26px; }
+    .hero h1 { color: #fff; font-size: clamp(2.6rem, 6vw, 4.3rem); font-weight: 700; letter-spacing: -0.03em; max-width: 820px; }
+    .hero h1 em { font-style: normal; position: relative; color: var(--sky); white-space: nowrap; }
+    .hero h1 em svg { position: absolute; left: 0; bottom: -14px; width: 100%; height: 18px; }
+    .hero p { font-size: 20px; max-width: 600px; margin: 30px 0 40px; }
+    .btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn { display: inline-block; text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 26px; border-radius: 999px; transition: transform .2s, background .2s, color .2s, border-color .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: #255bd0; }
+    .btn-outline { border: 1.5px solid rgba(255,255,255,.3); color: #fff; }
+    .btn-outline:hover { border-color: #fff; }
+
+    /* Chicago scenes */
+    .hero { min-height: 800px; padding-bottom: 380px !important; }
+    .skyline { position: absolute; left: 0; right: 0; bottom: 0; height: 420px; z-index: 0; pointer-events: none; }
+    .scene { position: absolute; left: 0; right: 0; bottom: 0; height: var(--sh); z-index: 0; pointer-events: none; }
+    .has-scene { position: relative; overflow: hidden; --sh: var(--scene, 300px); padding-bottom: calc(110px + var(--sh)) !important; }
+    .has-scene > .wrap { position: relative; z-index: 1; }
+    .city svg { width: 100%; height: 100%; display: block; }
+    .city .star { fill: #dfe8ff; animation: tw 3s ease-in-out infinite; }
+    .city .w { fill: #0f2244; transition: fill .4s; }
+    .city .w.on { fill: #ffd57a; }
+    .city .w.on.c { fill: #bcd4ff; }
+    .city.light .w { fill: #f3f7ff; }
+    .city .car { animation: drive linear infinite; }
+    .city .back { animation-name: driveBack; }
+    .city .train { animation: drive 26s linear infinite; }
+    .city .boat, .city .cloud { animation: drift linear infinite; }
+    .city .blink { animation: blink 1.6s steps(1) infinite; }
+    .city .wheel { transform-box: view-box; animation: spin 40s linear infinite; }
+    .city .ripple { animation: rip 5s ease-in-out infinite alternate; }
+    .city .fw { transform-box: fill-box; transform-origin: center; animation: burst 3.2s ease-out infinite; opacity: 0; }
+    @keyframes tw { 50% { opacity: .15; } }
+    @keyframes drive { from { transform: translateX(-300px); } to { transform: translateX(1740px); } }
+    @keyframes driveBack { from { transform: translateX(1740px); } to { transform: translateX(-300px); } }
+    @keyframes drift { from { transform: translateX(-260px); } to { transform: translateX(1700px); } }
+    @keyframes blink { 50% { opacity: 0; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes rip { to { transform: translateX(24px); } }
+    @keyframes burst { 0% { transform: scale(.1); opacity: 0; } 8% { opacity: 1; } 65% { opacity: .9; } 100% { transform: scale(1.05); opacity: 0; } }
+
+    /* Sections */
+    section.block { padding: 110px 0; }
+    section.alt { background: var(--blue-soft); border-radius: 48px; margin: 0 12px; }
+    .head { margin-bottom: 48px; }
+    .head h2 { font-size: clamp(2rem, 4vw, 2.7rem); font-weight: 700; }
+    .head h2::after { content: ""; display: block; width: 44px; height: 5px; border-radius: 999px; background: var(--blue); margin-top: 14px; }
+    .head p { color: var(--muted); margin-top: 14px; max-width: 600px; }
+
+    /* About */
+    .about { display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: start; }
+    .about p + p { margin-top: 18px; }
+    .facts { list-style: none; border-radius: var(--r); padding: 10px 26px; background: var(--blue-soft); }
+    .facts li { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #d3def3; font-size: 15px; }
+    .facts li:last-child { border: none; }
+    .facts b { color: var(--navy); font-weight: 600; }
+
+    /* Skills */
+    .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .skill { background: #fff; border-radius: var(--r); padding: 30px; box-shadow: 0 10px 30px rgba(11,31,63,.06); }
+    .skill h3 { font-size: 19px; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+    .skill h3::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--c); }
+    .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li { font-size: 14px; padding: 6px 14px; background: var(--blue-soft); border-radius: 999px; color: var(--navy); }
+
+    /* Projects */
+    .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+    .card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--r); padding: 28px; background: #fff; transition: box-shadow .25s, transform .25s; }
+    .card:hover { box-shadow: 0 18px 40px rgba(11,31,63,.1); transform: translateY(-4px); }
+    .card h3 { font-size: 19px; margin-bottom: 8px; text-transform: capitalize; }
+    .card p { color: var(--muted); font-size: 15px; flex: 1; margin-bottom: 20px; }
+    .card .meta { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+    .lang { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); }
+    .lang::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--blue); }
+    .links a { margin-left: 16px; font-weight: 600; text-decoration: none; color: var(--blue); }
+    .links a:hover { text-decoration: underline; }
+    .note { color: var(--muted); grid-column: 1 / -1; }
+    .note a { color: var(--blue); font-weight: 600; }
+
+    /* Achievements (badges) */
+    .featured { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 22px; }
+    .award { display: flex; align-items: center; gap: 28px; background: #fff; border-radius: var(--r); padding: 32px; box-shadow: 0 10px 30px rgba(11,31,63,.06); }
+    .award h3 { font-size: 21px; margin: 4px 0 6px; }
+    .award p { font-size: 15px; color: var(--muted); }
+    .kicker { font-size: 13px; font-weight: 600; color: var(--blue); }
+
+    .medal { flex: none; position: relative; width: 112px; height: 112px; border-radius: 50%; display: grid; place-items: center;
+      background: conic-gradient(from 210deg, var(--ring1), var(--ring2), var(--ring1)); box-shadow: 0 10px 24px rgba(11,31,63,.18); }
+    .medal::before { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: var(--face, var(--navy)); box-shadow: inset 0 0 0 2px rgba(255,255,255,.22); }
+    .medal svg, .medal b { position: relative; z-index: 1; color: #fff; }
+    .medal svg { width: 44px; height: 44px; }
+    .medal b { font-size: 26px; font-weight: 700; }
+    .medal .ribbon { position: absolute; z-index: 2; bottom: -10px; left: 50%; transform: translateX(-50%); background: var(--navy); color: #fff;
+      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; white-space: nowrap; box-shadow: 0 4px 10px rgba(11,31,63,.25); }
+    .gold .medal { --ring1: #c9dcff; --ring2: var(--navy); --face: var(--blue); }
+    .dj .medal { --ring1: var(--sky); --ring2: var(--blue); --face: var(--navy); }
+
+    .board { background: #fff; border-radius: var(--r); padding: 34px; box-shadow: 0 10px 30px rgba(11,31,63,.06); }
+    .board-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 14px; margin-bottom: 32px; }
+    .board-head h3 { font-size: 21px; margin-top: 4px; }
+    .legend { display: flex; gap: 18px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+    .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+    .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px 12px; }
+    .badge { width: 124px; text-align: center; }
+    .badge .medal { width: 82px; height: 82px; margin: 0 auto 12px; transition: transform .3s; }
+    .badge .medal::before { inset: 5px; }
+    .badge .medal b { font-size: 20px; }
+    .badge:nth-child(odd) .medal { transform: rotate(-3deg); }
+    .badge:nth-child(even) .medal { transform: rotate(3deg); }
+    .badge:hover .medal { transform: translateY(-5px) rotate(0); }
+    .badge strong { display: block; font-size: 14px; color: var(--ink); line-height: 1.3; }
+    .badge small { font-size: 12px; color: var(--muted); }
+    .van .medal, i.van { --ring1: #6f86ad; --ring2: #06142b; --face: var(--navy); background: var(--navy); }
+    .due .medal, i.due { --ring1: #a9c6ff; --ring2: #1a4fc0; --face: var(--blue); background: var(--blue); }
+    .str .medal, i.str { --ring1: #e2ecff; --ring2: #5b8ff5; --face: var(--sky); background: var(--sky); }
+    .badge .medal { background: conic-gradient(from 210deg, var(--ring1), var(--ring2), var(--ring1)); }
+
+    /* Passions section that pops */
+    .pop { position: relative; overflow: hidden; margin: 0 12px; padding: 120px 0; border-radius: 48px; color: #c9d6ee;
+      background: radial-gradient(circle at 12% 0%, rgba(47,111,237,.5), transparent 45%), radial-gradient(circle at 92% 100%, rgba(141,180,255,.28), transparent 45%), var(--navy); }
+    .pop h2, .pop h3, .pop strong { color: #fff; }
+    .pop .head p { color: #a9b9d6; font-size: 19px; }
+    .pop .head h2::after { background: var(--sky); }
+    .pop .kicker { color: var(--sky); }
+    .pop .featured { grid-template-columns: repeat(3, 1fr); }
+    .pop .award, .pop .board { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); box-shadow: none; }
+    .pop .award { flex-direction: column; text-align: center; padding: 40px 26px 32px; transition: transform .3s, border-color .3s, background .3s; }
+    .pop .award:hover { transform: translateY(-8px); border-color: rgba(141,180,255,.45); background: rgba(255,255,255,.08); }
+    .pop .award p, .pop .badge small, .pop .legend { color: #a9b9d6; }
+    .chip { display: inline-block; margin-top: 16px; font-size: 13px; font-weight: 600; color: #fff; background: rgba(47,111,237,.35); padding: 5px 14px; border-radius: 999px; }
+    .pop .medal { box-shadow: 0 0 0 8px rgba(47,111,237,.12), 0 0 46px rgba(47,111,237,.55); }
+    .medal::after { content: ""; position: absolute; inset: 0; border-radius: 50%; z-index: 2; pointer-events: none;
+      background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,.5) 50%, transparent 62%); background-size: 260% 100%; animation: shine 4.5s ease-in-out infinite; }
+    .badge:nth-child(3n+2) .medal::after { animation-delay: 1.2s; }
+    .badge:nth-child(3n) .medal::after { animation-delay: 2.4s; }
+    @keyframes shine { 0% { background-position: 160% 0; } 55%, 100% { background-position: -60% 0; } }
+    .medal .ribbon { z-index: 3; }
+    .pop .gold .medal .ribbon { background: #fff; color: var(--navy); }
+    .mic .medal { --ring1: #ffffff; --ring2: var(--blue); --face: #16305c; }
+    .pop .van .medal { --face: #1a3564; }
+    .pop i.van { background: #4d6fae; }
+
+
+    .badge .medal .role { position: absolute; z-index: 3; right: -4px; bottom: -2px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+      background: #fff; color: var(--navy); box-shadow: 0 3px 8px rgba(0,0,0,.3); }
+    .badge .medal .role svg { width: 15px; height: 15px; color: var(--navy); }
+    .due .medal .role svg { color: var(--blue); }
+    .str .medal .role svg { color: #3f7be8; }
+    .legend i.ico { width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; vertical-align: middle; background: #fff !important; margin-right: 8px; }
+    .legend i.ico svg { width: 12px; height: 12px; color: var(--navy); }
+    .legend i.ico.due svg { color: var(--blue); }
+    .tally { margin-top: 6px; font-size: 14px; color: #a9b9d6; }
+    .tally b { color: #fff; font-size: 16px; }
+
+
+    .trailer { display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: center; margin-bottom: 22px; padding: 22px;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: var(--r); }
+    .video { position: relative; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #050d1c; box-shadow: 0 0 0 1px rgba(141,180,255,.25), 0 0 50px rgba(47,111,237,.45); }
+    .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .trailer h3 { font-size: 26px; margin: 6px 0 10px; }
+    .trailer-copy > p:not(.kicker) { color: #a9b9d6; font-size: 16px; }
+
+    /* Contact */
+    .contact { position: relative; overflow: hidden; text-align: center; padding: 110px 0; margin: 110px 12px 12px; background: var(--navy); border-radius: 48px; color: #c9d6ee; }
+    .contact::before { content: ""; position: absolute; width: 460px; height: 460px; left: 50%; top: -260px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle, rgba(47,111,237,.5), transparent 70%); }
+    .contact .wrap { position: relative; }
+    .contact h2 { color: #fff; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; }
+    .contact p { margin: 14px auto 34px; max-width: 520px; }
+    .contact .btns { justify-content: center; }
+
+    footer { text-align: center; }
+    footer p { padding: 28px; font-size: 14px; color: var(--muted); }
+
+    /* Gentle fade-in */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 800px) {
+      body { font-size: 16px; }
+      .nav ul { gap: 0; }
+      .nav ul a { padding: 6px 10px; font-size: 14px; }
+      .nav ul li:nth-child(n+4) { display: none; }
+      .hero { padding: 80px 0 90px; border-radius: 0 0 32px 32px; }
+      .hero h1 em { white-space: normal; }
+      .hero p { font-size: 18px; }
+      section.block { padding: 80px 0; }
+      section.alt, .contact { border-radius: 32px; margin-left: 8px; margin-right: 8px; }
+      .about, .featured, .pop .featured { grid-template-columns: 1fr; gap: 22px; }
+      .hero { min-height: 0; padding-bottom: 250px !important; }
+      .skyline { height: 280px; }
+      .has-scene { --sh: calc(var(--scene, 300px) * .6); padding-bottom: calc(80px + var(--sh)) !important; }
+      .pop { border-radius: 32px; margin: 0 8px; padding: 80px 0; }
+      .trailer { grid-template-columns: 1fr; gap: 20px; padding: 14px; }
+      .trailer-copy { padding: 0 8px 10px; }
+      .skills { grid-template-columns: 1fr; }
+      .award { flex-direction: column; text-align: center; padding: 32px 22px; gap: 22px; }
+      .board { padding: 28px 12px; }
+      .badges { gap: 24px 6px; }
+      .badge { width: 94px; }
+      .badge .medal { width: 70px; height: 70px; }
+      .badge strong { font-size: 13px; }
+      .badge small { font-size: 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .city *, .medal::after { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="#top" class="logo">Ceejay<span>.</span></a>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#achievements">Passions</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow reveal">Full Stack Engineer · i.c.stars</p>
+        <h1 class="reveal">Hi, I'm Ceejay. I build full stack web apps, <em>front to back.<svg viewBox="0 0 200 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 40 4, 80 16, 120 8 S 180 6, 197 10" fill="none" stroke="#2f6fed" stroke-width="4" stroke-linecap="round"/></svg></em></h1>
+        <!-- EDIT ME: one or two sentences about what you do -->
+        <p class="reveal">I design and build complete web applications, from responsive user interfaces to the APIs and databases that power them.</p>
+        <div class="btns reveal">
+          <a class="btn btn-primary" href="#projects">View my work</a>
+          <a class="btn btn-outline" href="https://github.com/BigdawgCeejay" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="skyline city night" data-scene="hero" aria-hidden="true"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="block has-scene" style="--scene: 300px">
+      <div class="scene city light reveal" data-scene="lakefront" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="head reveal"><h2>About</h2></div>
+        <div class="about">
+          <div class="reveal">
+            <!-- EDIT ME: replace with your own story -->
+            <p>I'm a full stack engineer who enjoys owning a feature end to end: shaping the user experience, building the server logic, and designing the data behind it. Through the i.c.stars program, I've been building real-world projects while strengthening my skills in collaboration and leadership.</p>
+            <p>Chicago is home, and the city's energy is in everything I do. Outside of work you'll find me behind the DJ decks, testing new material at open mics as an amateur stand-up comic, or locked in on Marvel Rivals, where I've reached champion with Daredevil.</p>
+            <p>It might look like a lot of different hobbies, but they all come down to the same thing I love about engineering: timing, reading the room, and putting in the reps until it clicks. Now I'm looking for my next opportunity as a full stack engineer, where I can ship meaningful products and make an impact on a team.</p>
+          </div>
+          <ul class="facts reveal">
+            <li><span>Location</span><b>Chicago, IL</b></li>
+            <li><span>Program</span><b>i.c.stars</b></li>
+            <li><span>Focus</span><b>Full Stack Engineering</b></li>
+            <li><span>Off the clock</span><b>DJ · Comedian · Gamer</b></li>
+            <li><span>Status</span><b>Open to opportunities</b></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="block alt has-scene" style="--scene: 290px">
+      <div class="scene city light soft reveal" data-scene="elevated" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="head reveal"><h2>Skills</h2><p>My stack, from the browser to the database.</p></div>
+        <!-- EDIT ME: add or remove skills -->
+        <div class="skills">
+          <div class="skill reveal" style="--c: var(--navy)">
+            <h3>Frontend</h3>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li><li>Responsive Design</li></ul>
+          </div>
+          <div class="skill reveal" style="--c: var(--blue)">
+            <h3>Backend &amp; Data</h3>
+            <ul class="tags"><li>Node.js</li><li>Express</li><li>Python</li><li>REST APIs</li><li>SQL</li></ul>
+          </div>
+          <div class="skill reveal" style="--c: var(--sky)">
+            <h3>Tools &amp; Workflow</h3>
+            <ul class="tags"><li>Git</li><li>GitHub</li><li>VS Code</li><li>Figma</li><li>Agile</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="block has-scene" style="--scene: 300px">
+      <div class="scene city light reveal" data-scene="river" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="head reveal"><h2>Projects</h2><p>Selected work from my GitHub.</p></div>
+        <div id="project-grid" class="projects">
+          <p class="note">Loading projects…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="pop has-scene" style="--scene: 330px">
+      <div class="scene city night reveal" data-scene="fireworks" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="head reveal"><h2>Off the clock.</h2><p>Music, comedy, and competition. Different stages, same skills: timing, reading the room, and putting in the reps.</p></div>
+
+        <div class="featured">
+          <article class="award gold reveal">
+            <div class="medal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>
+              <span class="ribbon">Champion</span>
+            </div>
+            <div>
+              <p class="kicker">Marvel Rivals · Main hero</p>
+              <h3>Daredevil Champion</h3>
+              <p>Earned champion status with my main hero through patience, timing, and reading the fight.</p>
+              <span class="chip">Duelist main</span>
+            </div>
+          </article>
+
+          <article class="award dj reveal">
+            <div class="medal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg>
+            </div>
+            <div>
+              <p class="kicker">Music</p>
+              <!-- EDIT ME: your DJ name and genres -->
+              <h3>DJ</h3>
+              <p>Reading the crowd, planning the flow, and keeping the energy right where it needs to be.</p>
+              <span class="chip">Hip-Hop · R&amp;B · Afrobeats · House</span>
+            </div>
+          </article>
+
+          <article class="award mic reveal">
+            <div class="medal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8"/></svg>
+            </div>
+            <div>
+              <p class="kicker">Comedy</p>
+              <!-- EDIT ME: where you perform, how long you've been doing it -->
+              <h3>Stand-Up Comedian</h3>
+              <p>Taking the mic at open mics and turning everyday life into material. Nothing teaches you to think on your feet faster.</p>
+              <span class="chip">Amateur · Open mics</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="trailer reveal">
+          <div class="video">
+            <iframe src="https://www.youtube-nocookie.com/embed/iV8lE08wGoE?rel=0" title="Daredevil: The Man Without Fear | Character Reveal | Marvel Rivals" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="trailer-copy">
+            <p class="kicker">Official trailer · Marvel Rivals</p>
+            <h3>My main, in action.</h3>
+            <p>Daredevil is the hero I earned champion with. His kit rewards patience and timing: read the fight, pick the moment, then commit.</p>
+            <span class="chip">Champion · Duelist</span>
+          </div>
+        </div>
+
+        <div class="board reveal">
+          <div class="board-head">
+            <div><p class="kicker">Marvel Rivals · Hero roster</p><h3>Heroes Mastered</h3><p class="tally"><b>10</b> heroes · <b>3</b> roles · <b>1</b> champion</p></div>
+            <div class="legend"><span><i class="ico van"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.1-8 11-4.6-1.9-8-6-8-11V5z"/></svg></i>Vanguard</span><span><i class="ico due"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 4l11 11M20 4L9 15M13 17l4 4M11 17l-4 4M16 14l-3 3M8 14l3 3"/></svg></i>Duelist</span><span><i class="ico str"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></i>Strategist</span></div>
+          </div>
+          <div class="badges">
+          <div class="badge van reveal"><div class="medal"><b>CA</b><span class="role" title="Vanguard"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.1-8 11-4.6-1.9-8-6-8-11V5z"/></svg></span></div><strong>Captain America</strong><small>Vanguard · Mastered</small></div>
+          <div class="badge van reveal"><div class="medal"><b>TH</b><span class="role" title="Vanguard"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.1-8 11-4.6-1.9-8-6-8-11V5z"/></svg></span></div><strong>Thor</strong><small>Vanguard · Mastered</small></div>
+          <div class="badge van reveal"><div class="medal"><b>MG</b><span class="role" title="Vanguard"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.1-8 11-4.6-1.9-8-6-8-11V5z"/></svg></span></div><strong>Magneto</strong><small>Vanguard · Mastered</small></div>
+          <div class="badge van reveal"><div class="medal"><b>RG</b><span class="role" title="Vanguard"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.1-8 11-4.6-1.9-8-6-8-11V5z"/></svg></span></div><strong>Rogue</strong><small>Vanguard · Mastered</small></div>
+          <div class="badge due reveal"><div class="medal"><b>BP</b><span class="role" title="Duelist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 4l11 11M20 4L9 15M13 17l4 4M11 17l-4 4M16 14l-3 3M8 14l3 3"/></svg></span></div><strong>Black Panther</strong><small>Duelist · Mastered</small></div>
+          <div class="badge due reveal"><div class="medal"><b>SM</b><span class="role" title="Duelist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 4l11 11M20 4L9 15M13 17l4 4M11 17l-4 4M16 14l-3 3M8 14l3 3"/></svg></span></div><strong>Spider-Man</strong><small>Duelist · Mastered</small></div>
+          <div class="badge due reveal"><div class="medal"><b>WV</b><span class="role" title="Duelist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 4l11 11M20 4L9 15M13 17l4 4M11 17l-4 4M16 14l-3 3M8 14l3 3"/></svg></span></div><strong>Wolverine</strong><small>Duelist · Mastered</small></div>
+          <div class="badge str reveal"><div class="medal"><b>UL</b><span class="role" title="Strategist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></div><strong>Ultron</strong><small>Strategist · Mastered</small></div>
+          <div class="badge str reveal"><div class="medal"><b>GB</b><span class="role" title="Strategist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></div><strong>Gambit</strong><small>Strategist · Mastered</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact has-scene" style="--scene: 340px">
+      <div class="scene city night reveal" data-scene="willis" aria-hidden="true"></div>
+      <div class="wrap reveal">
+        <h2>Let's work together.</h2>
+        <p>I'm open to new opportunities and always happy to connect.</p>
+        <div class="btns">
+          <!-- EDIT ME: add your email and LinkedIn -->
+          <a class="btn btn-primary" href="https://github.com/BigdawgCeejay" target="_blank" rel="noopener">GitHub</a>
+          <!-- <a class="btn btn-outline" href="mailto:you@example.com">Email me</a> -->
+          <!-- <a class="btn btn-outline" href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a> -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Ceejay. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ===== Settings =====
+    const GITHUB_USER = "BigdawgCeejay";
+    const HIDE = ["portfolio", "BigdawgCeejay"];   // repos to leave off the site
+    const CUSTOM_DESCRIPTIONS = {};               // e.g. { "my-repo": "What it does..." }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Fade sections in as they scroll into view
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    const watch = root => root.querySelectorAll(".reveal").forEach(el => io.observe(el));
+    watch(document);
+
+    // Highlight the current section in the nav
+    const links = [...document.querySelectorAll(".nav ul a")];
+    const sections = links.map(a => document.querySelector(a.getAttribute("href")));
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    sections.forEach(s => s && spy.observe(s));
+
+
+    // ===== Chicago scenes (all drawn in code) =====
+    (function () {
+      const W = 1440;
+      const PAL = {
+        night: { far: "#13284f", near: "#050d1c", near2: "#081530", glass: "#0a1830", slab: "#0c1b36", stone: "#1a2c4d", brace: "#14294f",
+                 ground: "#06101f", water: "#081a38", ripple: "#1d3a6e", win: true, lit: .3, night: true, wheel: "#8db4ff", train: "#2b4f8f", hull: "#c9d6ee", sail: "#e8efff" },
+        light: { far: "#e2ebfc", near: "#c5d7f6", near2: "#b8cdf3", glass: "#b0c8f2", slab: "#d3e0f9", stone: "#a8c0ee", brace: "#9db7ea",
+                 ground: "#c5d7f6", water: "#dae6fc", ripple: "#b8cdf3", win: true, lit: 0, night: false, wheel: "#9db8ec", train: "#7fa2e6", hull: "#7fa2e6", sail: "#ffffff" },
+        soft:  { far: "#dbe6fc", near: "#c2d4f4", near2: "#b8ccf1", glass: "#b3c8f0", slab: "#d2dff8", stone: "#a9c0ec", brace: "#a2bbea",
+                 ground: "#c2d4f4", water: "#d3e1fa", ripple: "#b8ccf1", win: true, lit: 0, night: false, wheel: "#8eaee8", train: "#6f95e0", hull: "#6f95e0", sail: "#ffffff" }
+      };
+
+      function make(H, G, pal, seed) {
+        let s = seed;
+        const r = () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+        const o = [];
+        const n = v => Math.round(v * 10) / 10;
+        const b = { o, r, H, G, pal };
+        b.win = (x, w, top, bottom = G) => {
+          for (let cx = x + 5; cx <= x + w - 9; cx += 9)
+            for (let cy = top + 8; cy <= bottom - 10; cy += 11) {
+              const q = r();
+              o.push(`<rect class="w${q < pal.lit ? " on" : ""}${q < pal.lit * .25 ? " c" : ""}" x="${n(cx)}" y="${n(cy)}" width="4" height="6"/>`);
+            }
+        };
+        b.rect = (x, w, top, fill = pal.near, rx = 0) => o.push(`<rect x="${n(x)}" y="${n(top)}" width="${n(w)}" height="${n(G - top)}" rx="${rx}" fill="${fill}"/>`);
+        b.ant = (x, top, len, w = 3) => {
+          o.push(`<line x1="${n(x)}" y1="${n(top)}" x2="${n(x)}" y2="${n(top - len)}" stroke="${pal.near}" stroke-width="${w}"/>`);
+          if (pal.night) o.push(`<circle class="blink" cx="${n(x)}" cy="${n(top - len)}" r="2.5" fill="#ff6b7a" style="animation-delay:-${n(r() * 1.6)}s"/>`);
+        };
+        b.far = (h0, h1) => {
+          for (let x = -10; x < W; ) { const w = 40 + r() * 50, top = G - (h0 + r() * h1); o.push(`<rect x="${n(x)}" y="${n(top)}" width="${n(w)}" height="${n(G - top)}" fill="${pal.far}"/>`); x += w + 2; }
+        };
+        b.generic = (from, to, h0, h1) => {
+          for (let x = from; x < to; ) {
+            const w = Math.min(Math.round(38 + r() * 34), to - x), top = Math.round(G - (h0 + r() * h1));
+            if (w > 14) { b.rect(x, w, top, r() < .5 ? pal.near : pal.near2); b.win(x, w, top); if (r() < .25) b.ant(x + w / 2, top, 12 + r() * 14); }
+            x += w + 5;
+          }
+        };
+        b.stars = (count, maxY) => { for (let i = 0; i < count; i++) o.push(`<circle class="star" cx="${n(r() * W)}" cy="${n(r() * maxY)}" r="${n(r() * 1.1 + .5)}" style="animation-delay:-${n(r() * 3)}s"/>`); };
+        b.water = (y) => {
+          o.push(`<rect x="0" y="${y}" width="${W}" height="${H - y}" fill="${pal.water}"/>`);
+          for (let i = 0; i < 26; i++) { const x = r() * W, yy = y + 8 + r() * (H - y - 12); o.push(`<line class="ripple" x1="${n(x)}" y1="${n(yy)}" x2="${n(x + 18 + r() * 30)}" y2="${n(yy)}" stroke="${pal.ripple}" stroke-width="2" stroke-linecap="round" style="animation-delay:-${n(r() * 5)}s"/>`); }
+        };
+        b.cloud = (y, scale, dur, delay) => o.push(`<g class="cloud" style="animation-duration:${dur}s;animation-delay:-${delay}s"><g transform="translate(0 ${y}) scale(${scale})" fill="#ffffff" opacity=".9"><ellipse cx="40" cy="20" rx="40" ry="14"/><ellipse cx="62" cy="10" rx="26" ry="16"/><ellipse cx="30" cy="12" rx="18" ry="12"/></g></g>`);
+        b.svg = () => `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice">${o.join("")}</svg>`;
+        return b;
+      }
+
+      // ----- Chicago landmarks (x = left edge, s = scale) -----
+      const willis = (b, x, s = 1) => {
+        const G = b.G, p = b.pal;
+        b.rect(x + 36 * s, 36 * s, G - 272 * s); b.rect(x, 72 * s, G - 236 * s); b.rect(x, 108 * s, G - 192 * s);
+        b.rect(x + 72 * s, 36 * s, G - 150 * s, p.near2);
+        b.win(x + 36 * s, 36 * s, G - 272 * s, G - 236 * s); b.win(x, 72 * s, G - 236 * s, G - 192 * s); b.win(x, 108 * s, G - 192 * s);
+        b.ant(x + 45 * s, G - 272 * s, 56 * s, 3 * s); b.ant(x + 63 * s, G - 272 * s, 56 * s, 3 * s);
+      };
+      const hancock = (b, x, s = 1) => {
+        const G = b.G, h = 258 * s, w = 96 * s, t = 18 * s;
+        b.o.push(`<polygon points="${x},${G} ${x + w},${G} ${x + w - t},${G - h} ${x + t},${G - h}" fill="${b.pal.near}"/>`);
+        b.win(x + 22 * s, 52 * s, G - h + 4);
+        const step = h / 5;
+        for (let i = 0; i < 5; i++) {
+          const y1 = G - i * step, y2 = y1 - step, i1 = t * (i / 5) + 4, i2 = t * ((i + 1) / 5) + 4;
+          b.o.push(`<path d="M${x + i1} ${y1} L${x + w - i2} ${y2} M${x + w - i1} ${y1} L${x + i2} ${y2}" stroke="${b.pal.brace}" stroke-width="${2 * s}"/>`);
+        }
+        b.ant(x + 33 * s, G - h, 60 * s, 3 * s); b.ant(x + 63 * s, G - h, 60 * s, 3 * s);
+      };
+      const trump = (b, x, s = 1) => {
+        const G = b.G, p = b.pal;
+        b.rect(x + 13 * s, 30 * s, G - 246 * s, p.glass); b.rect(x + 6 * s, 44 * s, G - 214 * s, p.glass); b.rect(x, 56 * s, G - 176 * s, p.glass);
+        b.win(x + 13 * s, 30 * s, G - 246 * s, G - 214 * s); b.win(x + 6 * s, 44 * s, G - 214 * s, G - 176 * s); b.win(x, 56 * s, G - 176 * s);
+        b.ant(x + 28 * s, G - 246 * s, 48 * s, 2);
+      };
+      const aon = (b, x, s = 1) => {
+        const G = b.G; b.rect(x, 50 * s, G - 250 * s, b.pal.slab);
+        b.win(x, 50 * s, G - 250 * s);
+      };
+      const stRegis = (b, x, s = 1) => {
+        const G = b.G, seg = 74 * s, gap = 6 * s;
+        [[0, 50], [1, 46], [2, 42]].forEach(([i, w]) => {
+          const top = G - (i + 1) * seg - i * gap, xx = x + (50 - w) * s / 2;
+          b.o.push(`<rect x="${xx}" y="${top}" width="${w * s}" height="${seg}" rx="${10 * s}" fill="${b.pal.glass}"/>`);
+          b.win(xx, w * s, top, top + seg);
+        });
+      };
+      const pru = (b, x, s = 1) => {
+        const G = b.G, top = G - 205 * s;
+        b.rect(x, 46 * s, top, b.pal.near2); b.win(x, 46 * s, top);
+        b.o.push(`<polygon points="${x},${top} ${x + 23 * s},${top - 46 * s} ${x + 46 * s},${top}" fill="${b.pal.near2}"/>`);
+        b.ant(x + 23 * s, top - 46 * s, 30 * s, 2);
+      };
+      const marina = (b, x, s = 1) => {
+        const G = b.G;
+        [x, x + 44 * s].forEach(cx => {
+          b.o.push(`<rect x="${cx}" y="${G - 150 * s}" width="${32 * s}" height="${150 * s}" rx="${16 * s}" fill="${b.pal.near2}"/>`);
+          for (let y = G - 136 * s; y < G - 18 * s; y += 8 * s) b.o.push(`<path d="M${cx + 3 * s} ${y} q${13 * s} ${5 * s} ${26 * s} 0" stroke="${b.pal.brace}" stroke-width="2" fill="none"/>`);
+          b.win(cx + 4 * s, 24 * s, G - 140 * s, G - 22 * s);
+        });
+      };
+      const wrigley = (b, x, s = 1) => {
+        const G = b.G, p = b.pal, c = p.night ? "#c9d6ee" : "#ffffff";
+        b.rect(x, 76 * s, G - 96 * s, p.stone); b.win(x, 76 * s, G - 96 * s);
+        b.rect(x + 25 * s, 26 * s, G - 150 * s, p.stone);
+        b.o.push(`<circle cx="${x + 38 * s}" cy="${G - 128 * s}" r="${8 * s}" fill="${c}" stroke="${p.brace}" stroke-width="2"/>`);
+        b.o.push(`<polygon points="${x + 27 * s},${G - 150 * s} ${x + 38 * s},${G - 178 * s} ${x + 49 * s},${G - 150 * s}" fill="${p.stone}"/>`);
+        b.ant(x + 38 * s, G - 178 * s, 14 * s, 2);
+      };
+      const ferris = (b, cx, cy, R, base) => {
+        const p = b.pal;
+        b.o.push(`<path d="M${cx} ${cy} L${cx - R * .55} ${base} M${cx} ${cy} L${cx + R * .55} ${base}" stroke="${p.wheel}" stroke-width="4"/>`);
+        let g = `<g class="wheel" style="transform-origin:${cx}px ${cy}px"><circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${p.wheel}" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="${R * .82}" fill="none" stroke="${p.wheel}" stroke-width="1" opacity=".6"/>`;
+        for (let i = 0; i < 16; i++) {
+          const a = i * Math.PI / 8, x2 = cx + R * Math.cos(a), y2 = cy + R * Math.sin(a);
+          g += `<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${p.wheel}" stroke-width="1.2" opacity=".7"/>`;
+          g += `<circle cx="${x2.toFixed(1)}" cy="${y2.toFixed(1)}" r="4.5" fill="${p.night ? (i % 2 ? "#ffd57a" : "#ffffff") : (i % 2 ? "#7fa2e6" : "#ffffff")}"/>`;
+        }
+        b.o.push(g + `<circle cx="${cx}" cy="${cy}" r="6" fill="${p.wheel}"/></g>`);
+      };
+      const sailboat = (b, y, dur, delay, sc = 1) => b.o.push(`<g class="boat" style="animation-duration:${dur}s;animation-delay:-${delay}s"><g transform="translate(0 ${y}) scale(${sc})"><path d="M10 0 V-30 L30 -2 Z" fill="${b.pal.sail}"/><path d="M8 -4 V-22 L-4 -4 Z" fill="${b.pal.sail}" opacity=".8"/><path d="M-6 0 H34 L28 7 H0 Z" fill="${b.pal.hull}"/></g></g>`);
+      const cars = (b, yR, yL, count) => {
+        for (let i = 0; i < count; i++) {
+          const back = i % 2 === 1, y = back ? yL : yR, dur = (9 + b.r() * 9).toFixed(1), delay = (b.r() * 18).toFixed(1);
+          const body = ["#2f6fed", "#8db4ff", "#1a3564", "#c9d6ee"][i % 4];
+          const light = back
+            ? `<rect x="0" y="${y + 2}" width="3" height="3" fill="#ff5a6a"/><polygon points="0,${y + 3} -24,${y - 2} -24,${y + 9}" fill="#ff5a6a" opacity=".18"/>`
+            : `<circle cx="24" cy="${y + 4}" r="2" fill="#fff3c4"/><polygon points="24,${y + 4} 54,${y - 2} 54,${y + 10}" fill="#fff3c4" opacity=".2"/>`;
+          b.o.push(`<g class="car${back ? " back" : ""}" style="animation-duration:${dur}s;animation-delay:-${delay}s"><rect x="0" y="${y}" width="24" height="8" rx="3" fill="${body}"/><rect x="5" y="${y - 4}" width="13" height="5" rx="2" fill="${body}"/>${light}</g>`);
+        }
+      };
+      const train = (b, y, color, lit, cls = "train", dur = 26) => {
+        let t = `<g class="${cls}" style="animation-duration:${dur}s">`;
+        for (let i = 0; i < 4; i++) {
+          const x = i * 52;
+          t += `<rect x="${x}" y="${y}" width="48" height="14" rx="3" fill="${color}"/>`;
+          for (let k = 0; k < 5; k++) t += `<rect x="${x + 5 + k * 9}" y="${y + 3}" width="5" height="5" fill="${lit}"/>`;
+        }
+        b.o.push(t + `</g>`);
+      };
+
+      // ----- Scenes -----
+      const scenes = {
+        // Night downtown from the river: flickering windows, traffic, the L
+        hero() {
+          const b = make(420, 340, PAL.night, 7);
+          b.o.push(`<circle cx="1230" cy="46" r="40" fill="#8db4ff" opacity=".12"/><circle cx="1230" cy="46" r="20" fill="#e8efff" opacity=".9"/>`);
+          b.stars(80, 150); b.far(70, 110);
+          b.generic(0, 190, 80, 100); hancock(b, 200); b.generic(306, 440, 90, 90);
+          pru(b, 448); aon(b, 506); stRegis(b, 568); trump(b, 632); marina(b, 704, .95);
+          b.generic(790, 862, 70, 50); willis(b, 870); b.generic(990, W, 80, 110);
+          b.o.push(`<rect x="0" y="340" width="${W}" height="80" fill="#06101f"/><line x1="0" y1="362" x2="${W}" y2="362" stroke="#1d3a6e" stroke-width="3"/>`);
+          for (let x = 20; x < W; x += 70) b.o.push(`<rect x="${x}" y="362" width="3" height="18" fill="#132a52"/>`);
+          b.o.push(`<line x1="0" y1="398" x2="${W}" y2="398" stroke="#1d3a6e" stroke-width="1.5" stroke-dasharray="14 12"/>`);
+          train(b, 346, "#2b4f8f", "#ffd57a");
+          cars(b, 384, 404, 9);
+          return b.svg();
+        },
+        // Morning on the lakefront with Navy Pier
+        lakefront() {
+          const b = make(300, 210, PAL.light, 11);
+          b.o.push(`<circle cx="1240" cy="70" r="58" fill="#e6eefd"/><circle cx="1240" cy="70" r="32" fill="#cfe0fb"/>`);
+          b.cloud(30, 1, 120, 10); b.cloud(70, .7, 150, 80); b.cloud(20, .8, 140, 45);
+          b.far(40, 60); b.generic(0, 140, 50, 60);
+          hancock(b, 150, .72); b.generic(225, 300, 50, 50); aon(b, 305, .75); trump(b, 352, .75); stRegis(b, 400, .72);
+          b.generic(442, 520, 40, 60); willis(b, 525, .72); b.generic(610, 800, 30, 50);
+          b.water(210);
+          b.o.push(`<rect x="900" y="200" width="540" height="12" fill="${PAL.light.near2}"/><rect x="1330" y="182" width="60" height="18" fill="${PAL.light.near}"/>`);
+          ferris(b, 1080, 140, 56, 200);
+          sailboat(b, 250, 90, 10); sailboat(b, 280, 120, 70, 1.2); sailboat(b, 236, 110, 40, .8);
+          return b.svg();
+        },
+        // Daytime on the L with the Loop behind it
+        elevated() {
+          const b = make(290, 220, PAL.soft, 23);
+          b.cloud(20, .9, 130, 30); b.cloud(60, .6, 160, 100);
+          b.far(60, 80); b.generic(0, 240, 60, 80); aon(b, 250, .85); b.generic(300, 420, 60, 70);
+          trump(b, 425, .85); b.generic(480, 640, 50, 80); willis(b, 650, .85); b.generic(750, 980, 60, 80);
+          hancock(b, 990, .8); b.generic(1070, W, 50, 90);
+          b.o.push(`<rect x="0" y="236" width="${W}" height="10" fill="${PAL.soft.stone}"/><rect x="0" y="220" width="${W}" height="16" fill="${PAL.soft.near}"/>`);
+          for (let x = 30; x < W; x += 96) b.o.push(`<rect x="${x}" y="246" width="7" height="44" fill="${PAL.soft.stone}"/><path d="M${x + 7} 250 L${x + 96} 286 M${x + 96} 250 L${x + 7} 286" stroke="${PAL.soft.brace}" stroke-width="2"/>`);
+          train(b, 206, PAL.soft.train, "#ffffff", "train", 22);
+          return b.svg();
+        },
+        // The river: Wrigley Building, Trump, Marina City and a bascule bridge
+        river() {
+          const b = make(300, 220, PAL.light, 31);
+          b.cloud(24, .8, 140, 20); b.cloud(50, .6, 170, 90);
+          b.far(50, 70); b.generic(0, 230, 40, 70);
+          marina(b, 240, .95); wrigley(b, 336); trump(b, 420, .95); stRegis(b, 490, .85); aon(b, 545, .85);
+          b.generic(600, 780, 40, 80); pru(b, 785, .9); b.generic(835, W, 40, 80);
+          b.water(220);
+          b.o.push(`<rect x="860" y="214" width="26" height="40" fill="${PAL.light.stone}"/><polygon points="856,214 873,198 890,214" fill="${PAL.light.stone}"/>`);
+          b.o.push(`<rect x="1180" y="214" width="26" height="40" fill="${PAL.light.stone}"/><polygon points="1176,214 1193,198 1210,214" fill="${PAL.light.stone}"/>`);
+          b.o.push(`<rect x="886" y="236" width="294" height="8" fill="${PAL.light.stone}"/>`);
+          let truss = `M886 236`; for (let x = 886; x < 1180; x += 21) truss += ` L${x + 10.5} 220 L${x + 21} 236`;
+          b.o.push(`<path d="${truss}" fill="none" stroke="${PAL.light.brace}" stroke-width="2.5"/><line x1="886" y1="220" x2="1180" y2="220" stroke="${PAL.light.brace}" stroke-width="2.5"/>`);
+          b.o.push(`<g class="boat" style="animation-duration:70s;animation-delay:-25s"><rect x="0" y="266" width="76" height="12" rx="5" fill="${PAL.light.hull}"/><rect x="12" y="256" width="50" height="11" rx="3" fill="#ffffff"/>${[0,1,2,3,4].map(k => `<rect x="${16 + k * 9}" y="259" width="5" height="4" fill="${PAL.light.hull}"/>`).join("")}</g>`);
+          return b.svg();
+        },
+        // Fireworks over Navy Pier
+        fireworks() {
+          const b = make(330, 250, PAL.night, 47);
+          b.stars(50, 120);
+          const bursts = [[980, 70, 46, "#ffd57a", 0], [1180, 50, 56, "#8db4ff", 1.1], [1320, 100, 38, "#ffffff", 2.0], [820, 110, 34, "#8db4ff", 2.6], [1080, 120, 30, "#ffd57a", 1.7], [420, 60, 30, "#ffffff", .6]];
+          bursts.forEach(([x, y, rr, c, d]) => {
+            let g = `<g class="fw" style="animation-delay:${d}s">`;
+            for (let i = 0; i < 14; i++) { const a = i * Math.PI / 7, x2 = x + rr * Math.cos(a), y2 = y + rr * Math.sin(a);
+              g += `<line x1="${(x + rr * .25 * Math.cos(a)).toFixed(1)}" y1="${(y + rr * .25 * Math.sin(a)).toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${c}" stroke-width="2.5" stroke-linecap="round"/><circle cx="${x2.toFixed(1)}" cy="${y2.toFixed(1)}" r="2.5" fill="${c}"/>`; }
+            b.o.push(g + `</g>`);
+          });
+          b.far(40, 70); b.generic(0, 200, 50, 70);
+          hancock(b, 210, .8); b.generic(290, 380, 50, 60); aon(b, 385, .8); trump(b, 432, .8); stRegis(b, 482, .75);
+          b.generic(525, 590, 40, 60); willis(b, 595, .8); b.generic(685, 760, 30, 40);
+          b.water(250);
+          b.o.push(`<rect x="860" y="240" width="580" height="12" fill="#0c1b36"/>`);
+          for (let x = 870; x < W; x += 22) b.o.push(`<circle class="blink" cx="${x}" cy="238" r="2" fill="#ffd57a" style="animation-delay:-${(x % 7) / 4}s"/>`);
+          ferris(b, 1060, 170, 60, 240);
+          for (let i = 0; i < 8; i++) { const x = 900 + i * 60; b.o.push(`<line class="ripple" x1="${x}" y1="${270 + (i % 3) * 14}" x2="${x + 26}" y2="${270 + (i % 3) * 14}" stroke="#ffd57a" stroke-width="2" opacity=".35" stroke-linecap="round"/>`); }
+          return b.svg();
+        },
+        // Willis Tower under a crescent moon
+        willis() {
+          const b = make(360, 322, PAL.night, 59);
+          b.stars(60, 160);
+          b.o.push(`<circle cx="1120" cy="70" r="22" fill="#e8efff"/><circle cx="1131" cy="62" r="20" fill="#0b1f3f"/>`);
+          b.far(50, 80); b.generic(0, 520, 50, 90); trump(b, 530, .8); b.generic(585, 658, 60, 60);
+          willis(b, 664, .95); b.generic(772, 900, 60, 70); aon(b, 905, .8); b.generic(950, W, 50, 90);
+          b.o.push(`<rect x="0" y="322" width="${W}" height="38" fill="#06101f"/><line x1="0" y1="341" x2="${W}" y2="341" stroke="#1d3a6e" stroke-width="1.5" stroke-dasharray="14 12"/>`);
+          cars(b, 328, 346, 7);
+          return b.svg();
+        }
+      };
+
+      document.querySelectorAll("[data-scene]").forEach(el => { const f = scenes[el.dataset.scene]; if (f) el.innerHTML = f(); });
+
+      // City lights flicking on and off
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const windows = document.querySelectorAll(".city.night .w");
+      if (!windows.length) return;
+      setInterval(() => {
+        for (let i = 0; i < 10; i++) windows[Math.floor(Math.random() * windows.length)].classList.toggle("on");
+      }, 120);
+    })();
+
+    // Load projects from GitHub
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    (async () => {
+      const grid = document.getElementById("project-grid");
+      try {
+        const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`, { signal: AbortSignal.timeout(8000) });
+        if (!res.ok) throw new Error(res.status);
+        const repos = (await res.json()).filter(r => !r.fork && !HIDE.includes(r.name));
+        if (!repos.length) { grid.innerHTML = `<p class="note">Projects coming soon.</p>`; return; }
+        grid.innerHTML = repos.map(r => {
+          const desc = CUSTOM_DESCRIPTIONS[r.name] || r.description || "Details available in the repository.";
+          const live = r.homepage || (r.has_pages ? `https://${GITHUB_USER.toLowerCase()}.github.io/${r.name}/` : "");
+          return `<article class="card reveal">
+            <h3>${esc(r.name.replace(/[-_]/g, " "))}</h3>
+            <p>${esc(desc)}</p>
+            <div class="meta">
+              ${r.language ? `<span class="lang">${esc(r.language)}</span>` : "<span></span>"}
+              <span class="links">
+                ${live ? `<a href="${esc(live)}" target="_blank" rel="noopener">Live ↗</a>` : ""}
+                <a href="${r.html_url}" target="_blank" rel="noopener">Code ↗</a>
+              </span>
+            </div>
+          </article>`;
+        }).join("");
+        watch(grid);
+      } catch {
+        grid.innerHTML = `<p class="note">Projects couldn't load right now. <a href="https://github.com/${GITHUB_USER}?tab=repositories" target="_blank" rel="noopener">View them on GitHub →</a></p>`;
+      }
+    })();
+  </script>
+</body>
+</html>
