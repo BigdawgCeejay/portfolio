@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume | Edward "CJ" Daniels</title>
+  <meta name="description" content="Resume of Edward &quot;CJ&quot; Daniels, Junior Software Developer in Chicago." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1f3f;
+      --blue: #2f6fed;
+      --blue-soft: #e9f0fe;
+      --sky: #8db4ff;
+      --text: #3d4a60;
+      --muted: #6d7a90;
+      --line: #e3e9f3;
+      --r: 22px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "DM Sans", system-ui, -apple-system, sans-serif; color: var(--text); background: #f4f7fc; line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3 { color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; }
+
+    .topbar { max-width: 900px; margin: 0 auto; padding: 22px 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .logo { font-weight: 700; font-size: 20px; color: var(--navy); }
+    .logo span { color: var(--blue); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn { display: inline-block; font-weight: 600; font-size: 14px; padding: 10px 20px; border-radius: 999px; border: 1.5px solid var(--line); color: var(--navy); background: #fff; cursor: pointer; font-family: inherit; }
+    .btn:hover { text-decoration: none; border-color: var(--blue); }
+    .btn-primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .btn-primary:hover { background: #255bd0; }
+
+    .page { max-width: 900px; margin: 0 auto 60px; background: #fff; border-radius: var(--r); box-shadow: 0 10px 40px rgba(11,31,63,.08); overflow: hidden; }
+    .head { background: var(--navy); color: #c9d6ee; padding: 44px 48px 38px; position: relative; }
+    .head::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 90% 0%, rgba(47,111,237,.45), transparent 50%); pointer-events: none; }
+    .head h1 { color: #fff; font-size: 38px; }
+    .head .role { color: var(--sky); font-weight: 600; margin-top: 6px; }
+    .contact { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 16px; font-size: 15px; position: relative; z-index: 1; }
+    .contact a { color: #fff; }
+
+    .body { padding: 36px 48px 44px; }
+    section + section { margin-top: 30px; }
+    h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .14em; color: var(--blue); padding-bottom: 8px; border-bottom: 2px solid var(--blue-soft); margin-bottom: 14px; }
+    .skills { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; font-size: 15px; }
+    .skills b { color: var(--navy); }
+    .job + .job { margin-top: 20px; }
+    .job-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .job h3 { font-size: 17px; }
+    .job h3 span { font-weight: 500; color: var(--text); }
+    .when { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    .field { color: var(--muted); font-size: 14px; font-style: italic; margin: 2px 0 6px; }
+    ul { padding-left: 20px; }
+    li { margin: 3px 0; }
+    li b { color: var(--navy); }
+
+    @media (max-width: 640px) {
+      .head, .body { padding-left: 24px; padding-right: 24px; }
+      .head h1 { font-size: 30px; }
+      .skills { grid-template-columns: 1fr; }
+      .skills b { margin-top: 8px; }
+    }
+    @media print {
+      body { background: #fff; font-size: 12px; }
+      .topbar { display: none; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; }
+      .head { -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 24px 32px; }
+      .body { padding: 20px 32px; }
+      .job { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="logo" href="./">Ceejay<span>.</span></a>
+    <div class="actions">
+      <a class="btn" href="./">← Back to portfolio</a>
+      <button class="btn btn-primary" onclick="window.print()">Download / Print PDF</button>
+    </div>
+  </div>
+
+  <main class="page">
+    <header class="head">
+      <h1>Edward “CJ” Daniels</h1>
+      <p class="role">Junior Software Developer · Full-Stack Web Development · SQL &amp; Data Modeling</p>
+      <div class="contact">
+        <span>Chicago, IL 60619</span>
+        <a href="tel:+13129256611">312-925-6611</a>
+        <a href="mailto:cdaniels@icstars.org">cdaniels@icstars.org</a>
+        <a href="https://www.linkedin.com/in/edward-daniels-7328a6212/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/BigdawgCeejay" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </header>
+
+    <div class="body">
+      <section>
+        <h2>Professional Summary</h2>
+        <p>Junior Software Developer and i.c.stars Technology Consultant with full-stack training in JavaScript, Python, SQL, HTML and CSS. Brings 8+ years of customer-facing experience, including 3 years in leadership that delivered a 32% increase in customer loyalty and a 20% reduction in complaints. Skilled in Agile delivery, data modeling and stakeholder communication, translating user needs into reliable, user-focused software.</p>
+      </section>
+
+      <section>
+        <h2>Technical Skills</h2>
+        <div class="skills">
+          <b>Languages</b><span>JavaScript, Python, SQL, HTML5, CSS3</span>
+          <b>Web Development</b><span>Front-End Development, Full-Stack Development, Responsive Web Design</span>
+          <b>Data &amp; Databases</b><span>Relational Databases, Data Modeling, ERDs, Database Schema Design</span>
+          <b>Tools &amp; Platforms</b><span>Git, GitHub, GitHub Pages, Visual Studio Code, Microsoft 365, Plaky</span>
+          <b>Methods</b><span>Agile/Scrum, SDLC, Debugging, End-to-End Testing, AI-Assisted Development</span>
+          <b>Core Competencies</b><span>Stakeholder Communication, Team Leadership, Training &amp; Coaching, Problem Solving, Conflict Resolution, Process Improvement, Regulatory Compliance, Customer Experience</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Professional Experience</h2>
+
+        <div class="job">
+          <div class="job-top"><h3>Technology Consultant Intern <span>— i.c.stars, Chicago, IL</span></h3><span class="when">08/2026 – Present</span></div>
+          <p class="field">Technology Training &amp; IT Consulting</p>
+          <ul>
+            <li><b>Collaborate</b> on the Relanta Consulting team to design and build a data application for Medline, a healthcare supply client</li>
+            <li><b>Translate</b> client requirements into user stories, a prioritized product backlog and sprint milestones using Agile methods in Plaky</li>
+            <li><b>Design</b> relational data models, ERDs and SQL database schemas to structure and process client data</li>
+            <li><b>Develop and debug</b> JavaScript and Python programs using functions, control flow and structured error handling</li>
+            <li><b>Build</b> a personal portfolio website with HTML, CSS and JavaScript, deployed on GitHub Pages using Git version control</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top"><h3>Dispensary Agent <span>— Ascend Wellness Holdings, Chicago, IL</span></h3><span class="when">07/2022 – 07/2025</span></div>
+          <p class="field">Healthcare Retail (Regulated Cannabis)</p>
+          <ul>
+            <li><b>Streamlined</b> checkout procedures to shorten transaction times and increase throughput in a high-volume retail environment</li>
+            <li><b>Reconciled</b> daily cash transactions with zero errors while maintaining accuracy under pressure</li>
+            <li><b>Analyzed</b> customer feedback to adjust product selection and improve patient satisfaction</li>
+            <li><b>Maintained</b> compliance with state health regulations and inspection-readiness standards</li>
+            <li><b>Educated</b> patients on products and dosing through clear, personalized consultations</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top"><h3>Customer Experience Manager <span>— Mariano’s, Chicago, IL</span></h3><span class="when">01/2019 – 01/2022</span></div>
+          <p class="field">Grocery Retail</p>
+          <ul>
+            <li><b>Led</b> a customer service team that increased customer loyalty by 32%</li>
+            <li><b>Reduced</b> customer complaints by 20% by redesigning service workflows</li>
+            <li><b>Implemented</b> a real-time feedback system that accelerated response times and issue resolution</li>
+            <li><b>Developed</b> and delivered training programs that strengthened team service skills and consistency</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top"><h3>Sales Associate <span>— Chicago, IL</span></h3><span class="when">01/2017 – 01/2019</span></div>
+          <p class="field">Retail Sales</p>
+          <ul>
+            <li><b>Exceeded</b> sales targets by identifying customer needs and recommending tailored solutions</li>
+            <li><b>Built</b> long-term client relationships that increased repeat business</li>
+            <li><b>Maintained</b> accurate product information and merchandising standards to drive store revenue</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top"><h3>Freelance DJ &amp; Audio Technician <span>— Self-Employed, Chicago, IL</span></h3><span class="when">03/2023 – Present</span></div>
+          <p class="field">Entertainment &amp; Live Events</p>
+          <ul>
+            <li><b>Configured and troubleshot</b> audio hardware and software (Rekordbox, Serato, Virtual DJ) for live events</li>
+            <li><b>Managed</b> client bookings, event timelines and digital promotion across SoundCloud and Instagram</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Projects</h2>
+        <div class="job">
+          <div class="job-top"><h3>Medline Data Application <span>— i.c.stars Client Consulting Project</span></h3></div>
+        </div>
+        <div class="job">
+          <div class="job-top"><h3>Personal Portfolio Website <span>— HTML, CSS, JavaScript, GitHub Pages</span></h3></div>
+          <ul>
+            <li><b>Designed and developed</b> a responsive portfolio showcasing projects, technical skills and professional background</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Education &amp; Training</h2>
+        <div class="job">
+          <div class="job-top"><h3>Technology &amp; Leadership Internship (Cycle 60) <span>— i.c.stars, Chicago, IL</span></h3><span class="when">08/2026 – Present</span></div>
+          <p class="field">Coursework: Programming Fundamentals, SQL, Data Modeling, Software Release &amp; Operations, AI Fundamentals, Business Consulting</p>
+        </div>
+        <div class="job">
+          <div class="job-top"><h3>Full-Stack Web Development Training <span>— Coursera &amp; Mimo</span></h3><span class="when">01/2026 – Present</span></div>
+        </div>
+        <div class="job">
+          <div class="job-top"><h3>Talent Acquisition Certification <span>— Coursera</span></h3><span class="when">2023</span></div>
+        </div>
+        <div class="job">
+          <div class="job-top"><h3>High School Diploma <span>— Kenwood Academy High School, Chicago, IL</span></h3><span class="when">2009</span></div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
