@@ -461,7 +461,10 @@
     // ===== Settings =====
     const GITHUB_USER = "BigdawgCeejay";
     const HIDE = ["portfolio", "BigdawgCeejay"];   // repos to leave off the site
-    const CUSTOM_DESCRIPTIONS = {};               // e.g. { "my-repo": "What it does..." }
+    const CUSTOM_DESCRIPTIONS = {                 // e.g. { "my-repo": "What it does..." }
+      "heatcheck": "A DJ set builder. Describe the night in plain English and HeatCheck builds an ordered set, checks every transition by BPM and Camelot key, scores the flow, reorders it with one tap, and exports to Rekordbox, Serato, Traktor and more.",
+      "t6a-control-flow": "Three short Python katas practicing variables, loops and conditionals, each built in three commits: scaffold, feature, refactor."
+    };
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
