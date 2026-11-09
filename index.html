@@ -240,48 +240,62 @@
     footer { text-align: center; }
     footer p { padding: 28px; font-size: 14px; color: var(--muted); }
 
-    /* Resume */
-    .resume-card { background: #fff; border-radius: var(--r); box-shadow: 0 10px 40px rgba(11,31,63,.08); overflow: hidden; }
-    .resume-top { background: var(--navy); color: #c9d6ee; padding: 40px 44px 34px; position: relative; }
-    .resume-top::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 90% 0%, rgba(47,111,237,.45), transparent 50%); pointer-events: none; }
-    .resume-top h3 { color: #fff; font-size: clamp(1.8rem, 3.5vw, 2.3rem); position: relative; z-index: 1; }
-    .resume-top .role { color: var(--sky); font-weight: 600; margin-top: 6px; position: relative; z-index: 1; }
-    .resume-contact { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 14px; font-size: 15px; position: relative; z-index: 1; }
-    .resume-contact a { color: #fff; text-decoration: none; }
-    .resume-contact a:hover { text-decoration: underline; }
-    .resume-body { padding: 34px 44px 40px; font-size: 16px; line-height: 1.6; }
-    .resume-body .r-sec + .r-sec { margin-top: 30px; }
-    .resume-body h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .14em; color: var(--blue); padding-bottom: 8px; border-bottom: 2px solid var(--blue-soft); margin-bottom: 14px; }
-    .r-skills { display: grid; grid-template-columns: 170px 1fr; gap: 6px 16px; font-size: 15px; }
-    .r-skills b { color: var(--navy); }
-    .r-job + .r-job { margin-top: 20px; }
+    /* Resume (matches CJ_Daniels_Resume_V2) */
+    .resume-card { --g: #1f4a2c; --g2: #2f6b3f; display: grid; grid-template-columns: 300px 1fr; background: #fff; border-radius: var(--r); box-shadow: 0 10px 40px rgba(11,31,63,.08); overflow: hidden; font-size: 15px; line-height: 1.55; }
+    .r-side { background: linear-gradient(180deg, #2f4437 0%, #2d5e3a 45%, #14301d 100%); color: #e6efe8; padding: 36px 28px; }
+    .r-side h3 { color: #fff; font-size: 2rem; line-height: 1.1; letter-spacing: -0.02em; }
+    .r-side .role { color: #c9dccd; margin-top: 12px; }
+    .r-side h4 { color: #fff; font-size: 14px; text-transform: uppercase; letter-spacing: .04em; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,.35); margin: 26px 0 10px; }
+    .r-side a { color: #e6efe8; text-decoration: none; }
+    .r-side a:hover { text-decoration: underline; }
+    .r-side dl { margin: 0; }
+    .r-side dt { color: #fff; font-weight: 700; margin-top: 10px; }
+    .r-side dd { margin: 0; }
+    .r-side small { color: #c9dccd; font-size: 13px; }
+    .r-main { padding: 32px 36px 36px; }
+    .r-main h4 { display: flex; align-items: center; gap: 12px; color: var(--g); font-size: 16px; text-transform: uppercase; letter-spacing: .02em; margin: 0 0 10px; }
+    .r-main h4::after { content: ""; flex: 1; height: 3px; border-radius: 3px; background: linear-gradient(90deg, var(--g), rgba(31,74,44,0)); }
+    .r-main h4 + p { margin-bottom: 22px; }
+    .r-job { border-left: 2px solid #d9e3db; padding-left: 12px; margin-bottom: 14px; }
     .r-job-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    .r-job h5 { font-size: 17px; color: var(--navy); letter-spacing: -0.01em; }
-    .r-job h5 span { font-weight: 500; color: var(--text); }
-    .r-when { color: var(--muted); font-size: 14px; white-space: nowrap; }
-    .r-field { color: var(--muted); font-size: 14px; font-style: italic; margin: 2px 0 6px; }
-    .resume-body ul { padding-left: 20px; }
-    .resume-body li { margin: 3px 0; }
-    .resume-body li b { color: var(--navy); }
+    .r-job h5 { font-size: 16px; color: var(--ink); letter-spacing: -0.01em; }
+    .r-when { color: #5c6b62; font-size: 14px; font-weight: 600; white-space: nowrap; }
+    .r-org { color: var(--g2); font-size: 14px; }
+    .r-org i { color: #5c6b62; }
+    .r-job ul { padding-left: 18px; margin-top: 4px; }
+    .r-job li { margin: 2px 0; }
+    .r-job li b { color: var(--ink); }
     .resume-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
     .resume-actions .btn { border: 0; cursor: pointer; font-family: inherit; }
-    @media (max-width: 640px) {
-      .resume-top, .resume-body { padding-left: 22px; padding-right: 22px; }
-      .r-skills { grid-template-columns: 1fr; }
-      .r-skills b { margin-top: 8px; }
+    @media (max-width: 860px) {
+      .resume-card { grid-template-columns: 1fr; }
+      .r-main { padding: 26px 22px 28px; }
+      .r-side { padding: 28px 22px; }
     }
     @media print {
-      body.printing-resume { background: #fff; font-size: 12px; }
+      @page { size: letter; margin: 0; }
+      body.printing-resume { background: #fff; }
       body.printing-resume > header, body.printing-resume > footer,
       body.printing-resume main > section:not(#resume),
       body.printing-resume #resume .head, body.printing-resume .resume-actions { display: none !important; }
       body.printing-resume #resume { padding: 0 !important; margin: 0 !important; background: #fff !important; border-radius: 0 !important; }
+      body.printing-resume #resume .wrap { max-width: none; padding: 0; }
       body.printing-resume #resume .reveal { opacity: 1 !important; transform: none !important; }
-      body.printing-resume .resume-card { box-shadow: none; border-radius: 0; }
-      body.printing-resume .resume-top { -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 24px 32px; }
-      body.printing-resume .resume-body { padding: 20px 32px; font-size: 12px; }
-      body.printing-resume .resume-body h4 { break-after: avoid; }
-      body.printing-resume .r-job { break-inside: avoid; }
+      body.printing-resume .resume-card { grid-template-columns: 2.55in 1fr; min-height: 11in; box-shadow: none; border-radius: 0; font-size: 8.6pt; line-height: 1.28; }
+      body.printing-resume .r-side, body.printing-resume .r-main h4::after { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body.printing-resume .r-side { padding: .26in .2in; font-size: 8.3pt; line-height: 1.24; }
+      body.printing-resume .r-side .role { margin-top: 6px; }
+      body.printing-resume .r-job li { margin: 0; }
+      body.printing-resume .r-main h4 + p { margin-bottom: 10px; }
+      body.printing-resume .r-side h3 { font-size: 22pt; }
+      body.printing-resume .r-side h4 { margin: 12px 0 6px; font-size: 9pt; }
+      body.printing-resume .r-side dt { margin-top: 5px; }
+      body.printing-resume .r-side small, body.printing-resume .r-org, body.printing-resume .r-when { font-size: 8pt; }
+      body.printing-resume .r-main { padding: .25in .28in; }
+      body.printing-resume .r-main h4 { font-size: 10.5pt; margin-bottom: 6px; }
+      body.printing-resume .r-job h5 { font-size: 9.5pt; }
+      body.printing-resume .r-job { margin-bottom: 7px; break-inside: avoid; }
+      body.printing-resume .r-job ul { margin-top: 2px; }
     }
 
     /* Gentle fade-in */
@@ -441,127 +455,103 @@
       </div>
     </section>
 
-    <!-- RESUME -->
+    <!-- RESUME (matches CJ_Daniels_Resume_V2) -->
     <section id="resume" class="block alt">
       <div class="wrap">
         <div class="head reveal"><h2>Resume</h2><p>My experience, skills and training at a glance.</p></div>
         <article class="resume-card">
-          <div class="resume-top">
+          <aside class="r-side">
             <h3>Edward “CJ” Daniels</h3>
-            <p class="role">Junior Software Developer · Full-Stack Web Development · SQL &amp; Data Modeling</p>
-            <div class="resume-contact">
-              <span>Chicago, IL 60619</span>
-              <a href="tel:+13129256611">312-925-6611</a>
-              <a href="mailto:cdaniels@icstars.org">cdaniels@icstars.org</a>
-              <a href="https://www.linkedin.com/in/edward-daniels-7328a6212/" target="_blank" rel="noopener">LinkedIn</a>
-              <a href="https://github.com/BigdawgCeejay" target="_blank" rel="noopener">GitHub</a>
+            <p class="role">Junior Software Developer<br />Full-Stack Web Development<br />SQL &amp; Data Modeling</p>
+
+            <h4>Contact</h4>
+            <p>Chicago, IL<br /><a href="tel:+13129256611">312-925-6611</a><br /><a href="mailto:edwarddaniels969@gmail.com">edwarddaniels969@gmail.com</a></p>
+
+            <h4>Technical Skills</h4>
+            <dl>
+              <dt>Languages</dt><dd>JavaScript, Python, SQL, HTML5, CSS3</dd>
+              <dt>Web Development</dt><dd>Front-End &amp; Full-Stack Development, Responsive Web Design, React (in progress)</dd>
+              <dt>Data &amp; Databases</dt><dd>Relational Databases, Data Modeling, ERDs, Database Schema Design</dd>
+              <dt>Tools &amp; Platforms</dt><dd>Git, GitHub, GitHub Pages, VS Code, Microsoft 365, Plaky</dd>
+              <dt>Methods</dt><dd>Agile/Scrum, SDLC, Debugging, Troubleshooting, End-to-End Testing, AI Fundamentals</dd>
+              <dt>Professional</dt><dd>Customer Service, Team Leadership, Stakeholder Communication, POS Systems, Cash Handling, Inventory Management, Regulatory Compliance, Conflict Resolution, Time Management</dd>
+            </dl>
+
+            <h4>Education &amp; Training</h4>
+            <dl>
+              <dt>Technology &amp; Leadership Program (Cycle 60)</dt><dd>i.c.stars, Chicago, IL<br /><small>Aug – Dec 2026 (expected)</small></dd>
+              <dt>Full-Stack Web Development Training (in progress)</dt><dd>Coursera &amp; Mimo<br /><small>2026 – Present</small></dd>
+              <dt>Talent Acquisition Certification</dt><dd>Coursera<br /><small>Mar 2025</small></dd>
+              <dt>Cannabis Responsible Vendor Training</dt><dd>State of Illinois<br /><small>Completed annually</small></dd>
+              <dt>College Coursework</dt><dd>City Colleges of Chicago (Harold Washington College, Kennedy-King College)</dd>
+              <dt>High School Diploma</dt><dd>Kenwood Academy High School, Chicago, IL</dd>
+            </dl>
+          </aside>
+
+          <div class="r-main">
+            <h4>Profile</h4>
+            <p>Junior Software Developer and i.c.stars Technology Consultant Intern with full-stack training in JavaScript, Python, SQL, HTML and CSS, currently building skills in React. Brings 10+ years of customer service experience across retail, regulated healthcare retail and transportation, including a promotion to Sales Floor Lead at Nike. Skilled in Agile delivery, data modeling, troubleshooting and stakeholder communication, with a record of accuracy and compliance in fast-paced environments.</p>
+
+            <h4>Experience</h4>
+            <div class="r-job">
+              <div class="r-job-top"><h5>Technology Consultant Intern</h5><span class="r-when">Aug 2026 – Present</span></div>
+              <p class="r-org">i.c.stars, Chicago, IL · <i>Technology Training &amp; IT Consulting</i></p>
+              <ul>
+                <li><b>Collaborate</b> with Team Relanta to design and build a data application for Medline, a healthcare supply client</li>
+                <li><b>Translate</b> client requirements into user stories, a prioritized backlog and sprint milestones using Agile methods in Plaky</li>
+                <li><b>Design</b> relational data models, ERDs and SQL database schemas to structure and process client data</li>
+                <li><b>Develop and debug</b> JavaScript and Python programs using functions, control flow and structured error handling</li>
+                <li><b>Built</b> a responsive personal portfolio website with HTML, CSS and JavaScript, deployed on GitHub Pages</li>
+              </ul>
             </div>
-          </div>
-
-          <div class="resume-body">
-            <div class="r-sec">
-              <h4>Professional Summary</h4>
-              <p>Junior Software Developer and i.c.stars Technology Consultant with full-stack training in JavaScript, Python, SQL, HTML and CSS. Brings 8+ years of customer-facing experience, including 3 years in leadership that delivered a 32% increase in customer loyalty and a 20% reduction in complaints. Skilled in Agile delivery, data modeling and stakeholder communication, translating user needs into reliable, user-focused software.</p>
+            <div class="r-job">
+              <div class="r-job-top"><h5>Security Officer (Part-Time) · Dispensary Agent</h5><span class="r-when">Feb 2023 – Present</span></div>
+              <p class="r-org">Ascend Wellness Holdings, Chicago, IL · <i>Regulated Healthcare Retail (Cannabis)</i></p>
+              <ul>
+                <li><b>Returned</b> in a part-time security role (2026 – Present), verifying IDs and medical cards and maintaining a safe, compliant facility</li>
+                <li><b>Reconciled</b> high-volume daily cash handling and POS transactions with zero errors as a Dispensary Agent (Feb 2023 – Jul 2025)</li>
+                <li><b>Delivered</b> customer service through personalized patient consultations and streamlined checkout procedures that shortened wait times</li>
+                <li><b>Maintained</b> state regulatory compliance, inventory accuracy and inspection readiness; completed Responsible Vendor Training annually</li>
+              </ul>
             </div>
-
-            <div class="r-sec">
-              <h4>Technical Skills</h4>
-              <div class="r-skills">
-                <b>Languages</b><span>JavaScript, Python, SQL, HTML5, CSS3</span>
-                <b>Web Development</b><span>Front-End Development, Full-Stack Development, Responsive Web Design</span>
-                <b>Data &amp; Databases</b><span>Relational Databases, Data Modeling, ERDs, Database Schema Design</span>
-                <b>Tools &amp; Platforms</b><span>Git, GitHub, GitHub Pages, Visual Studio Code, Microsoft 365, Plaky</span>
-                <b>Methods</b><span>Agile/Scrum, SDLC, Debugging, End-to-End Testing, AI-Assisted Development</span>
-                <b>Core Competencies</b><span>Stakeholder Communication, Team Leadership, Training &amp; Coaching, Problem Solving, Conflict Resolution, Process Improvement, Regulatory Compliance, Customer Experience</span>
-              </div>
+            <div class="r-job">
+              <div class="r-job-top"><h5>Rideshare Driver (Independent Contractor)</h5><span class="r-when">2017 – Present (part-time)</span></div>
+              <p class="r-org">Self-Employed (Uber &amp; Lyft), Chicago, IL · <i>Transportation</i></p>
+              <ul>
+                <li><b>Delivered</b> safe, reliable rides across the Chicago area while balancing other roles and full-time training</li>
+                <li><b>Managed</b> own schedule, routes, vehicle upkeep and earnings as an independent business</li>
+              </ul>
             </div>
-
-            <div class="r-sec">
-              <h4>Professional Experience</h4>
-
-              <div class="r-job">
-                <div class="r-job-top"><h5>Technology Consultant Intern <span>— i.c.stars, Chicago, IL</span></h5><span class="r-when">08/2026 – Present</span></div>
-                <p class="r-field">Technology Training &amp; IT Consulting</p>
-                <ul>
-                  <li><b>Collaborate</b> on the Relanta Consulting team to design and build a data application for Medline, a healthcare supply client</li>
-                  <li><b>Translate</b> client requirements into user stories, a prioritized product backlog and sprint milestones using Agile methods in Plaky</li>
-                  <li><b>Design</b> relational data models, ERDs and SQL database schemas to structure and process client data</li>
-                  <li><b>Develop and debug</b> JavaScript and Python programs using functions, control flow and structured error handling</li>
-                  <li><b>Build</b> a personal portfolio website with HTML, CSS and JavaScript, deployed on GitHub Pages using Git version control</li>
-                </ul>
-              </div>
-
-              <div class="r-job">
-                <div class="r-job-top"><h5>Dispensary Agent <span>— Ascend Wellness Holdings, Chicago, IL</span></h5><span class="r-when">07/2022 – 07/2025</span></div>
-                <p class="r-field">Healthcare Retail (Regulated Cannabis)</p>
-                <ul>
-                  <li><b>Streamlined</b> checkout procedures to shorten transaction times and increase throughput in a high-volume retail environment</li>
-                  <li><b>Reconciled</b> daily cash transactions with zero errors while maintaining accuracy under pressure</li>
-                  <li><b>Analyzed</b> customer feedback to adjust product selection and improve patient satisfaction</li>
-                  <li><b>Maintained</b> compliance with state health regulations and inspection-readiness standards</li>
-                  <li><b>Educated</b> patients on products and dosing through clear, personalized consultations</li>
-                </ul>
-              </div>
-
-              <div class="r-job">
-                <div class="r-job-top"><h5>Customer Experience Manager <span>— Mariano’s, Chicago, IL</span></h5><span class="r-when">01/2019 – 01/2022</span></div>
-                <p class="r-field">Grocery Retail</p>
-                <ul>
-                  <li><b>Led</b> a customer service team that increased customer loyalty by 32%</li>
-                  <li><b>Reduced</b> customer complaints by 20% by redesigning service workflows</li>
-                  <li><b>Implemented</b> a real-time feedback system that accelerated response times and issue resolution</li>
-                  <li><b>Developed</b> and delivered training programs that strengthened team service skills and consistency</li>
-                </ul>
-              </div>
-
-              <div class="r-job">
-                <div class="r-job-top"><h5>Sales Associate <span>— Chicago, IL</span></h5><span class="r-when">01/2017 – 01/2019</span></div>
-                <p class="r-field">Retail Sales</p>
-                <ul>
-                  <li><b>Exceeded</b> sales targets by identifying customer needs and recommending tailored solutions</li>
-                  <li><b>Built</b> long-term client relationships that increased repeat business</li>
-                  <li><b>Maintained</b> accurate product information and merchandising standards to drive store revenue</li>
-                </ul>
-              </div>
-
-              <div class="r-job">
-                <div class="r-job-top"><h5>Freelance DJ &amp; Audio Technician <span>— Self-Employed, Chicago, IL</span></h5><span class="r-when">03/2023 – Present</span></div>
-                <p class="r-field">Entertainment &amp; Live Events</p>
-                <ul>
-                  <li><b>Configured and troubleshot</b> audio hardware and software (Rekordbox, Serato, Virtual DJ) for live events</li>
-                  <li><b>Managed</b> client bookings, event timelines and digital promotion across SoundCloud and Instagram</li>
-                </ul>
-              </div>
+            <div class="r-job">
+              <div class="r-job-top"><h5>Freelance DJ &amp; Audio Technician</h5><span class="r-when">2024 – Present</span></div>
+              <p class="r-org">DJ Buddy Love (Self-Employed), Chicago, IL · <i>Entertainment &amp; Live Events</i></p>
+              <ul>
+                <li><b>Configured and troubleshot</b> audio hardware and software (Rekordbox, Serato, Virtual DJ) for live events</li>
+                <li><b>Managed</b> client bookings, event timelines and digital promotion across SoundCloud and Instagram</li>
+              </ul>
             </div>
-
-            <div class="r-sec">
-              <h4>Projects</h4>
-              <div class="r-job">
-                <div class="r-job-top"><h5>Medline Data Application <span>— i.c.stars Client Consulting Project</span></h5></div>
-              </div>
-              <div class="r-job">
-                <div class="r-job-top"><h5>Personal Portfolio Website <span>— HTML, CSS, JavaScript, GitHub Pages</span></h5></div>
-                <ul>
-                  <li><b>Designed and developed</b> a responsive portfolio showcasing projects, technical skills and professional background</li>
-                </ul>
-              </div>
+            <div class="r-job">
+              <div class="r-job-top"><h5>Cashier &amp; Stocker</h5><span class="r-when">2020 – 2023</span></div>
+              <p class="r-org">Mariano's, Chicago, IL · <i>Grocery Retail</i></p>
+              <ul>
+                <li><b>Provided</b> customer service and processed high-volume cash, card and EBT transactions accurately on POS systems</li>
+                <li><b>Supported</b> inventory management by stocking and rotating products, including through the COVID-19 pandemic</li>
+              </ul>
             </div>
-
-            <div class="r-sec">
-              <h4>Education &amp; Training</h4>
-              <div class="r-job">
-                <div class="r-job-top"><h5>Technology &amp; Leadership Internship (Cycle 60) <span>— i.c.stars, Chicago, IL</span></h5><span class="r-when">08/2026 – Present</span></div>
-                <p class="r-field">Coursework: Programming Fundamentals, SQL, Data Modeling, Software Release &amp; Operations, AI Fundamentals, Business Consulting</p>
-              </div>
-              <div class="r-job">
-                <div class="r-job-top"><h5>Full-Stack Web Development Training <span>— Coursera &amp; Mimo</span></h5><span class="r-when">01/2026 – Present</span></div>
-              </div>
-              <div class="r-job">
-                <div class="r-job-top"><h5>Talent Acquisition Certification <span>— Coursera</span></h5><span class="r-when">2023</span></div>
-              </div>
-              <div class="r-job">
-                <div class="r-job-top"><h5>High School Diploma <span>— Kenwood Academy High School, Chicago, IL</span></h5><span class="r-when">2009</span></div>
-              </div>
+            <div class="r-job">
+              <div class="r-job-top"><h5>Sales Associate</h5><span class="r-when">Jan 2017 – Jan 2019</span></div>
+              <p class="r-org">Yelp, Chicago, IL · <i>Sales</i></p>
+              <ul>
+                <li><b>Exceeded</b> sales targets by identifying customer needs and recommending tailored solutions, building repeat business</li>
+              </ul>
+            </div>
+            <div class="r-job">
+              <div class="r-job-top"><h5>Sales Floor Lead (promoted from Sales Associate)</h5><span class="r-when">May 2013 – Dec 2016</span></div>
+              <p class="r-org">Nike, Chicago, IL · <i>Athletic Retail</i></p>
+              <ul>
+                <li><b>Earned promotion</b> to Sales Floor Lead; provided team leadership by directing floor operations and shift assignments</li>
+                <li><b>Coached</b> associates on product knowledge, customer engagement and sales techniques</li>
+              </ul>
             </div>
           </div>
         </article>
