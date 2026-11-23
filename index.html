@@ -341,6 +341,16 @@
       .reveal { opacity: 1; transform: none; transition: none; }
       .city *, .medal::after { animation: none !important; }
     }
+      /* Headshot */
+    .hero-photo { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); width: 290px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 12%; border-radius: 28px; border: 6px solid rgba(255,255,255,.12); box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+    @media (min-width: 901px) { .hero h1, .hero p { max-width: calc(100% - 340px); } }
+    @media (max-width: 900px) { .hero-photo { position: static; transform: none; display: block; width: 170px; margin: 0 0 28px; height: auto; aspect-ratio: 1 / 1; object-position: center 8%; border-radius: 50%; } }
+    /* Headshot flare: glow ring + open-to-work badge */
+    .hero-photo { border: 0; padding: 5px; background: linear-gradient(135deg,#2f6fed,#8db4ff,#2f6fed); background-size: 200% 200%; animation: shimmer 6s ease infinite; box-shadow: 0 0 0 1px rgba(141,180,255,.3), 0 0 60px rgba(47,111,237,.55), 0 24px 60px rgba(0,0,0,.4); }
+    @keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .hero .wrap::after { content: "\1F44B  Open to work"; position: absolute; right: 190px; top: calc(50% + 150px); background: #fff; color: #0b1f3f; font-weight: 700; font-size: 14px; padding: 8px 14px; border-radius: 999px; box-shadow: 0 10px 24px rgba(0,0,0,.3); transform: rotate(-4deg); z-index: 2; }
+    @media (max-width: 900px) { .hero .wrap::after { display: none; } .hero-photo { padding: 4px; } }
+    @media (prefers-reduced-motion: reduce) { .hero-photo { animation: none; } }
   </style>
 </head>
 <body>
@@ -368,6 +378,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="wrap">
+        <img class="hero-photo" src="cj-daniels-headshot.webp" alt="Headshot of Ceejay Daniels" width="290" height="362" />
         <p class="eyebrow reveal">Full Stack Engineer · i.c.stars</p>
         <h1 class="reveal">Hi, I'm Ceejay. I build full stack web apps, <em>front to back.<svg viewBox="0 0 200 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 40 4, 80 16, 120 8 S 180 6, 197 10" fill="none" stroke="#2f6fed" stroke-width="4" stroke-linecap="round"/></svg></em></h1>
         <!-- EDIT ME: one or two sentences about what you do -->
