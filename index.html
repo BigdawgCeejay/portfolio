@@ -61,6 +61,13 @@
     .btn-primary:hover { background: #255bd0; }
     .btn-outline { border: 1.5px solid rgba(255,255,255,.3); color: #fff; }
     .btn-outline:hover { border-color: #fff; }
+    .btn-resume { background: linear-gradient(135deg, #f59e0b, #f97316); color: #1a1206; box-shadow: 0 0 0 0 rgba(249,115,22,.55); animation: resumePulse 2.6s ease-out infinite; }
+    .btn-resume::before { content: "\2193"; margin-right: 8px; font-weight: 700; }
+    .btn-resume:hover { background: linear-gradient(135deg, #fbbf24, #fb923c); color: #1a1206; }
+    @keyframes resumePulse { 0% { box-shadow: 0 0 0 0 rgba(249,115,22,.55); } 70% { box-shadow: 0 0 0 14px rgba(249,115,22,0); } 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0); } }
+    .nav ul a.nav-resume { color: #c2410c; background: #fff1ea; font-weight: 600; }
+    .nav ul a.nav-resume:hover, .nav ul a.nav-resume.active { color: #fff; background: #f97316; }
+    @media (prefers-reduced-motion: reduce) { .btn-resume { animation: none; } }
 
     /* Chicago scenes */
     .hero { min-height: 800px; padding-bottom: 380px !important; }
@@ -134,6 +141,17 @@
     .feature-card .req { margin-top: auto; font-size: 14px; font-weight: 600; color: var(--blue); text-decoration: none; }
     .feature-card .req:hover { text-decoration: underline; }
     @media (max-width: 800px) { .feature-card { grid-template-columns: 1fr; } }
+    .feature-card .shot.flow { background: linear-gradient(150deg, #0b1f3f, #1d3f7a); color: #fff; flex-direction: column; justify-content: center; align-items: stretch; padding: 32px 28px; gap: 10px; }
+    .flow .flow-title { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--sky); font-weight: 600; }
+    .flow .flow-name { font-size: 30px; font-weight: 700; margin-bottom: 6px; }
+    .flow ol { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; counter-reset: step; }
+    .flow ol li { counter-increment: step; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 12px; padding: 9px 12px; font-size: 14px; }
+    .flow ol li::before { content: counter(step); display: inline-grid; place-items: center; width: 20px; height: 20px; margin-right: 8px; border-radius: 50%; background: var(--blue); font-size: 11px; font-weight: 700; }
+    .feature-card .badge.client { background: #e7f6ee; color: #15803d; }
+    .to-top { position: fixed; right: 20px; bottom: 20px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--blue); color: #fff; text-decoration: none; font-size: 20px; box-shadow: 0 10px 24px rgba(11,31,63,.25); opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity .25s, transform .25s; }
+    .to-top.show { opacity: 1; pointer-events: auto; transform: none; }
+    .to-top:hover { background: var(--ink); }
+    @media print { .to-top { display: none; } }
     .card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--r); padding: 28px; background: #fff; transition: box-shadow .25s, transform .25s; }
     .card:hover { box-shadow: 0 18px 40px rgba(11,31,63,.1); transform: translateY(-4px); }
     .card h3 { font-size: 19px; margin-bottom: 8px; text-transform: capitalize; }
@@ -306,8 +324,14 @@
       body { font-size: 16px; }
       .nav ul { gap: 0; }
       .nav ul a { padding: 6px 10px; font-size: 14px; }
-      .nav ul li:nth-child(n+5) { display: none; }
-      .nav ul li:nth-child(2), .nav ul li:nth-child(3) { display: none; }
+      html { scroll-padding-top: 112px; }
+      .nav { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 6px; row-gap: 6px; }
+      .feature-card .badges { gap: 8px; }
+      .feature-card .badge { width: auto; }
+      .nav nav { display: contents; }
+      .nav ul { order: 3; width: 100%; justify-content: space-between; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+      .nav ul::-webkit-scrollbar { display: none; }
+      .nav ul a { white-space: nowrap; }
       .social a { padding: 5px 10px; font-size: 13px; }
       .hero { padding: 80px 0 90px; border-radius: 0 0 32px 32px; }
       .hero h1 em { white-space: normal; }
@@ -332,7 +356,7 @@
     }
     @media (max-width: 420px) {
       .nav nav { gap: 6px; }
-      .nav ul a { padding: 6px 7px; font-size: 13px; }
+      .nav ul a { padding: 6px 5px; font-size: 13px; }
       .social { gap: 4px; }
       .social a { padding: 4px 8px; font-size: 12px; }
     }
@@ -362,7 +386,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#resume">Resume</a></li>
+          <li><a class="nav-resume" href="#resume">Resume</a></li>
           <li><a href="#achievements">Passions</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -385,7 +409,8 @@
         <p class="reveal">I design and build complete web applications, from responsive user interfaces to the APIs and databases that power them.</p>
         <div class="btns reveal">
           <a class="btn btn-primary" href="#projects">View my work</a>
-          <a class="btn btn-outline" href="#resume">Resume</a>
+          <a class="btn btn-outline" href="#medline">Medline project</a>
+          <a class="btn btn-resume" href="#resume">Resume</a>
           <a class="btn btn-outline" href="https://github.com/BigdawgCeejay" target="_blank" rel="noopener">GitHub</a>
           <a class="btn btn-outline" href="https://www.linkedin.com/in/edward-daniels-7328a6212/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
@@ -407,7 +432,7 @@
           </div>
           <ul class="facts reveal">
             <li><span>Location</span><b>Chicago, IL</b></li>
-            <li><span>Program</span><b>i.c.stars</b></li>
+            <li><span>Currently enrolled</span><b>i.c.stars</b></li>
             <li><span>Focus</span><b>Full Stack Engineering</b></li>
             <li><span>Off the clock</span><b>DJ · Comedian · Gamer</b></li>
             <li><span>Status</span><b>Open to opportunities</b></li>
@@ -458,6 +483,29 @@
             </ul>
             <div class="stack"><span>JavaScript</span><span>HTML</span><span>CSS</span><span>Web Crypto API</span><span>Claude AI</span></div>
             <a class="req" href="mailto:cdaniels@icstars.org?subject=HeatCheck%20code%20request">Code available on request &rarr;</a>
+          </div>
+        </article>
+        <article id="medline" class="feature-card reveal">
+          <div class="shot flow" role="img" aria-label="Follow Thru workflow: Report, Identify, Review, Investigate, Route, Assign, Resolve, Close">
+            <span class="flow-title">Medline · Team Relanta</span>
+            <span class="flow-name">Follow Thru</span>
+            <ol>
+              <li>Report</li><li>Identify</li><li>Review</li><li>Investigate</li>
+              <li>Route</li><li>Assign</li><li>Resolve</li><li>Close</li>
+            </ol>
+          </div>
+          <div class="info">
+            <div class="badges"><span class="badge client">Client project</span><span class="badge">i.c.stars Cycle 60</span><span class="badge">Project Manager</span></div>
+            <h3>Follow Thru: Problem Management for Medline</h3>
+            <p>A data application for Medline, a healthcare supply company, that turns scattered warehouse incident reports into tracked Problems with clear owners, from the first report to a documented fix.</p>
+            <ul>
+              <li>AI groups related incidents by type, location, description and timing to surface recurring Problems</li>
+              <li>Role-based dashboards for six personas, from warehouse employees and IT support to application owners</li>
+              <li>Routes each Problem to the right team, tracks status and records root cause and resolution for next time</li>
+              <li>Led the Relanta team as Project Manager, alongside UX, engineering and business analyst leads</li>
+            </ul>
+            <div class="stack"><span>Data modeling</span><span>SQL</span><span>JavaScript</span><span>AI pattern detection</span><span>Agile</span></div>
+            <a class="req" href="mailto:cdaniels@icstars.org?subject=Follow%20Thru%20(Medline)%20project">Ask me about this project &rarr;</a>
           </div>
         </article>
         <div id="project-grid" class="projects">
@@ -658,7 +706,7 @@
         <h2>Let's work together.</h2>
         <p>I'm open to new opportunities and always happy to connect.</p>
         <div class="btns">
-          <a class="btn btn-primary" href="#resume">View Resume</a>
+          <a class="btn btn-resume" href="#resume">View Resume</a>
           <a class="btn btn-outline" href="https://www.linkedin.com/in/edward-daniels-7328a6212/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn btn-outline" href="https://github.com/BigdawgCeejay" target="_blank" rel="noopener">GitHub</a>
           <a class="btn btn-outline" href="mailto:cdaniels@icstars.org">Email me</a>
@@ -667,6 +715,7 @@
     </section>
   </main>
 
+  <a href="#top" class="to-top" aria-label="Back to top">&uarr;</a>
   <footer>
     <p>© <span id="year"></span> Ceejay. All rights reserved.</p>
   </footer>
@@ -981,6 +1030,11 @@
         grid.innerHTML = `<p class="note">Projects couldn't load right now. <a href="https://github.com/${GITHUB_USER}?tab=repositories" target="_blank" rel="noopener">View them on GitHub →</a></p>`;
       }
     })();
+
+    // Show the back-to-top button after scrolling past the hero
+    const toTop = document.querySelector(".to-top");
+    const toggleTop = () => toTop.classList.toggle("show", window.scrollY > 600);
+    window.addEventListener("scroll", toggleTop, { passive: true }); toggleTop();
   </script>
 </body>
 </html>
